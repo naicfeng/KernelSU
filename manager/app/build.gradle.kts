@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "me.weishu.kernelsu"
+    namespace = "org.cuojue.ksu"
 
     ndkVersion = "25.1.8937393"
 
