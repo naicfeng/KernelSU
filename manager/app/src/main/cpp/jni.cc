@@ -11,7 +11,7 @@
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_becomeManager(JNIEnv *env, jclass clazz, jstring pkg) {
+Java_org_cuojue_ksu_Natives_becomeManager(JNIEnv *env, jclass clazz, jstring pkg) {
     auto cpkg = env->GetStringUTFChars(pkg, nullptr);
     auto result = become_manager(cpkg);
     env->ReleaseStringUTFChars(pkg, cpkg);
@@ -20,13 +20,13 @@ Java_me_weishu_kernelsu_Natives_becomeManager(JNIEnv *env, jclass clazz, jstring
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_me_weishu_kernelsu_Natives_getVersion(JNIEnv *env, jclass clazz) {
+Java_org_cuojue_ksu_Natives_getVersion(JNIEnv *env, jclass clazz) {
     return get_version();
 }
 
 extern "C"
 JNIEXPORT jintArray JNICALL
-Java_me_weishu_kernelsu_Natives_getAllowList(JNIEnv *env, jclass clazz) {
+Java_org_cuojue_ksu_Natives_getAllowList(JNIEnv *env, jclass clazz) {
     int uids[1024];
     int size = 0;
     bool result = get_allow_list(uids, &size);
@@ -41,7 +41,7 @@ Java_me_weishu_kernelsu_Natives_getAllowList(JNIEnv *env, jclass clazz) {
 
 extern "C"
 JNIEXPORT jintArray JNICALL
-Java_me_weishu_kernelsu_Natives_getDenyList(JNIEnv *env, jclass clazz) {
+Java_org_cuojue_ksu_Natives_getDenyList(JNIEnv *env, jclass clazz) {
     int uids[1024];
     int size = 0;
     bool result = get_deny_list(uids, &size);
@@ -56,7 +56,7 @@ Java_me_weishu_kernelsu_Natives_getDenyList(JNIEnv *env, jclass clazz) {
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_allowRoot(JNIEnv *env, jclass clazz, jint uid, jboolean allow) {
+Java_org_cuojue_ksu_Natives_allowRoot(JNIEnv *env, jclass clazz, jint uid, jboolean allow) {
     return allow_su(uid, allow);
 }
 
@@ -64,6 +64,6 @@ Java_me_weishu_kernelsu_Natives_allowRoot(JNIEnv *env, jclass clazz, jint uid, j
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_isSafeMode(JNIEnv *env, jclass clazz) {
+Java_org_cuojue_ksu_Natives_isSafeMode(JNIEnv *env, jclass clazz) {
     return is_safe_mode();
 }
