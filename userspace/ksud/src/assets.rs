@@ -12,11 +12,6 @@ pub const BUSYBOX_PATH: &str = concatcp!(BINARY_DIR, "busybox");
 #[folder = "bin/aarch64"]
 struct Asset;
 
-#[cfg(target_arch = "x86_64")]
-#[derive(RustEmbed)]
-#[folder = "bin/x86_64"]
-struct Asset;
-
 pub fn ensure_binaries() -> Result<()> {
     for file in Asset::iter() {
         utils::ensure_binary(
