@@ -22,13 +22,14 @@ fun getBugreportFile(context: Context): File {
     val dropboxFile = File(bugreportDir, "dropbox.tar.gz")
     val pstoreFile = File(bugreportDir, "pstore.tar.gz")
     val diagFile = File(bugreportDir, "diag.tar.gz")
+    val bootlogFile = File(bugreportDir, "bootlog.tar.gz")
     val mountsFile = File(bugreportDir, "mounts.txt")
     val fileSystemsFile = File(bugreportDir, "filesystems.txt")
     val ksuFileTree = File(bugreportDir, "ksu_tree.txt")
     val appListFile = File(bugreportDir, "app_list.txt")
     val propFile = File(bugreportDir, "props.txt")
 
-    val shell = createRootShell()
+    val shell = getRootShell()
 
     shell.newJob().add("dmesg > ${dmesgFile.absolutePath}").exec()
     shell.newJob().add("logcat -d > ${logcatFile.absolutePath}").exec()
@@ -36,8 +37,9 @@ fun getBugreportFile(context: Context): File {
     shell.newJob().add("tar -czf ${dropboxFile.absolutePath} /data/system/dropbox").exec()
     shell.newJob().add("tar -czf ${pstoreFile.absolutePath} /sys/fs/pstore").exec()
     shell.newJob().add("tar -czf ${diagFile.absolutePath} /data/vendor/diag").exec()
+    shell.newJob().add("tar -czf ${bootlogFile.absolutePath} /data/adb/ksu/log").exec()
 
-    shell.newJob().add("cat /proc/mounts > ${mountsFile.absolutePath}").exec()
+    shell.newJob().add("cat /proc/1/mountinfo > ${mountsFile.absolutePath}").exec()
     shell.newJob().add("cat /proc/filesystems > ${fileSystemsFile.absolutePath}").exec()
     shell.newJob().add("ls -alRZ /data/adb > ${ksuFileTree.absolutePath}").exec()
     shell.newJob().add("cat /data/system/packages.list > ${appListFile.absolutePath}").exec()
