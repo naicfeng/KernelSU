@@ -1,4 +1,4 @@
-package me.weishu.kernelsu.ui;
+package org.cuojue.ksu.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.weishu.kernelsu.IKsuInterface;
+import org.cuojue.ksu.IKsuInterface;
 import rikka.parcelablelist.ParcelableListSlice;
 
 /**
