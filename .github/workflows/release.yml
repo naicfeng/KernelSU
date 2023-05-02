@@ -12,7 +12,7 @@ jobs:
   build-a13-kernel:
     uses: ./.github/workflows/build-kernel-a13.yml
   release:
-    needs: 
+    needs:
       - build-manager
       - build-a13-kernel
     runs-on: ubuntu-latest
