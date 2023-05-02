@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 import org.cuojue.ksu.Natives
 import org.cuojue.ksu.R
 import org.cuojue.ksu.ui.component.ConfirmDialog
-import org.cuojue.ksu.ui.component.DialogResult
+import org.cuojue.ksu.ui.component.ConfirmResult
 import org.cuojue.ksu.ui.screen.destinations.InstallScreenDestination
 import org.cuojue.ksu.ui.util.*
 import org.cuojue.ksu.ui.viewmodel.ModuleViewModel
@@ -143,13 +143,13 @@ private fun ModuleList(viewModel: ModuleViewModel, modifier: Modifier = Modifier
     val snackBarHost = LocalSnackbarHost.current
 
     suspend fun onModuleUninstall(module: ModuleViewModel.ModuleInfo) {
-        val dialogResult = dialogHost.showDialog(
+        val confirmResult = dialogHost.showConfirm(
             moduleStr,
             content = moduleUninstallConfirm.format(module.name),
             confirm = uninstall,
             dismiss = cancel
         )
-        if (dialogResult != DialogResult.Confirmed) {
+        if (confirmResult != ConfirmResult.Confirmed) {
             return
         }
 

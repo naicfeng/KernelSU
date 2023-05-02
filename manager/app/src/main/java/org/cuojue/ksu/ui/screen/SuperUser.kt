@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import org.cuojue.ksu.Natives
 import org.cuojue.ksu.R
 import org.cuojue.ksu.ui.component.ConfirmDialog
-import org.cuojue.ksu.ui.component.DialogResult
+import org.cuojue.ksu.ui.component.ConfirmResult
 import org.cuojue.ksu.ui.component.SearchAppBar
 import org.cuojue.ksu.ui.util.LocalDialogHost
 import org.cuojue.ksu.ui.util.LocalSnackbarHost
@@ -119,13 +119,13 @@ fun SuperUserScreen() {
                     AppItem(app, isChecked) { checked ->
                         scope.launch {
                             if (checked) {
-                                val dialogResult = dialogHost.showDialog(
+                                val confirmResult = dialogHost.showConfirm(
                                     app.label,
                                     content = content,
                                     confirm = confirm,
                                     dismiss = cancel
                                 )
-                                if (dialogResult != DialogResult.Confirmed) {
+                                if (confirmResult != ConfirmResult.Confirmed) {
                                     return@launch
                                 }
                             }
