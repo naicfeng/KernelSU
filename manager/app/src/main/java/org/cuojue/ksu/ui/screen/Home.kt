@@ -33,7 +33,6 @@ import org.cuojue.ksu.R
 import org.cuojue.ksu.ui.screen.destinations.SettingScreenDestination
 import org.cuojue.ksu.ui.util.*
 
-@OptIn(ExperimentalMaterial3Api::class)
 @RootNavGraph(start = true)
 @Destination
 @Composable

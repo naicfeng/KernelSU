@@ -39,7 +39,6 @@ import org.cuojue.ksu.ui.screen.destinations.InstallScreenDestination
 import org.cuojue.ksu.ui.util.*
 import org.cuojue.ksu.ui.viewmodel.ModuleViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Destination
 @Composable
 fun ModuleScreen(navigator: DestinationsNavigator) {
