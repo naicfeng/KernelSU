@@ -1,10 +1,4 @@
-<<<<<<< HEAD:manager/app/src/main/java/org/cuojue/ksu/ui/screen/AppProfile.kt
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package org.cuojue.ksu.ui.screen
-=======
-package org.cuojue.ksu.ui.screen
->>>>>>> 0cdca0d05330ac6379ef91ae4249a5662537ede8:manager/app/src/main/java/me/weishu/kernelsu/ui/screen/AppProfile.kt
 
 import android.os.Parcelable
 import androidx.compose.animation.AnimatedVisibility

@@ -68,41 +68,41 @@ Java_org_cuojue_ksu_Natives_isSafeMode(JNIEnv *env, jclass clazz) {
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_isAllowlistMode(JNIEnv *env, jclass clazz) {
+Java_org_cuojue_ksu_Natives_isAllowlistMode(JNIEnv *env, jclass clazz) {
     return is_allowlist_mode();
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_setAllowlistMode(JNIEnv *env, jclass clazz, jboolean is_allowlist) {
+Java_org_cuojue_ksu_Natives_setAllowlistMode(JNIEnv *env, jclass clazz, jboolean is_allowlist) {
     return set_allowlist_mode(is_allowlist);
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_addUidToAllowlist(JNIEnv *env, jclass clazz, jint uid) {
+Java_org_cuojue_ksu_Natives_addUidToAllowlist(JNIEnv *env, jclass clazz, jint uid) {
     return add_to_allow_list(uid);
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_removeUidFromAllowlist(JNIEnv *env, jclass clazz, jint uid) {
+Java_org_cuojue_ksu_Natives_removeUidFromAllowlist(JNIEnv *env, jclass clazz, jint uid) {
     return remove_from_allow_list(uid);
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_addUidToDenylist(JNIEnv *env, jclass clazz, jint uid) {
+Java_org_cuojue_ksu_Natives_addUidToDenylist(JNIEnv *env, jclass clazz, jint uid) {
     return add_to_deny_list(uid);
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_removeUidFromDenylist(JNIEnv *env, jclass clazz, jint uid) {
+Java_org_cuojue_ksu_Natives_removeUidFromDenylist(JNIEnv *env, jclass clazz, jint uid) {
     return remove_from_deny_list(uid);
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_isUidInAllowlist(JNIEnv *env, jclass clazz, jint uid) {
+Java_org_cuojue_ksu_Natives_isUidInAllowlist(JNIEnv *env, jclass clazz, jint uid) {
     return is_in_allow_list(uid);
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_me_weishu_kernelsu_Natives_isUidInDenylist(JNIEnv *env, jclass clazz, jint uid) {
+Java_org_cuojue_ksu_Natives_isUidInDenylist(JNIEnv *env, jclass clazz, jint uid) {
     return is_in_deny_list(uid);
 }
