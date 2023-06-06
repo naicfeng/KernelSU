@@ -2,9 +2,7 @@
 
 package org.cuojue.ksu.ui.component.profile
 
-import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -17,7 +15,6 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.Icon
@@ -165,10 +162,18 @@ fun RootProfileConfig(
         }
 
         ListItem(headlineContent = {
+            val keyboardController = LocalSoftwareKeyboardController.current
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text("SELinux context") },
                 value = profile.context,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Ascii,
+                    imeAction = ImeAction.Done,
+                ),
+                keyboardActions = KeyboardActions(onDone = {
+                    keyboardController?.hide()
+                }),
                 onValueChange = {
                     onProfileChange(profile.copy(context = it, rootUseDefault = false))
                 }
@@ -204,6 +209,7 @@ fun GroupsPanel(selected: List<Groups>, closeSelection: (selection: Set<Groups>)
             selection = ListSelection.Multiple(
                 showCheckBoxes = true,
                 options = options,
+                maxChoices = 32, // Kernel only supports 32 groups at most
             ) { indecies, _ ->
                 // Handle selection
                 selection.clear()
