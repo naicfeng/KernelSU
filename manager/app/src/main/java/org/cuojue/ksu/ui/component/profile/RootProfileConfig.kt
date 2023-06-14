@@ -8,17 +8,20 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
+import androidx.compose.material.icons.filled.Group
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -27,16 +30,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
+import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.IconSource
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.views.IconComponent
 import com.maxkeppeler.sheets.list.ListDialog
 import com.maxkeppeler.sheets.list.models.ListOption
 import com.maxkeppeler.sheets.list.models.ListSelection
@@ -165,7 +176,7 @@ fun RootProfileConfig(
             val keyboardController = LocalSoftwareKeyboardController.current
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("SELinux context") },
+                label = { Text(text = stringResource(R.string.profile_selinux_context)) },
                 value = profile.context,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Ascii,
@@ -195,6 +206,7 @@ fun GroupsPanel(selected: List<Groups>, closeSelection: (selection: Set<Groups>)
         val options = groups.map { value ->
             ListOption(
                 titleText = value.display,
+                subtitleText = value.desc,
                 selected = selected.contains(value),
             )
         }
@@ -206,6 +218,9 @@ fun GroupsPanel(selected: List<Groups>, closeSelection: (selection: Set<Groups>)
             }, onCloseRequest = {
                 showDialog = false
             }),
+            header = Header.Default(
+                title = stringResource(R.string.profile_groups),
+            ),
             selection = ListSelection.Multiple(
                 showCheckBoxes = true,
                 options = options,
@@ -229,7 +244,7 @@ fun GroupsPanel(selected: List<Groups>, closeSelection: (selection: Set<Groups>)
         }) {
 
         Column(modifier = Modifier.padding(16.dp)) {
-            Text("groups")
+            Text(stringResource(R.string.profile_groups))
             FlowRow {
                 selected.forEach { group ->
                     AssistChip(
@@ -257,6 +272,7 @@ fun CapsPanel(
         val options = caps.map { value ->
             ListOption(
                 titleText = value.display,
+                subtitleText = value.desc,
                 selected = selected.contains(value),
             )
         }
@@ -268,6 +284,9 @@ fun CapsPanel(
             }, onCloseRequest = {
                 showDialog = false
             }),
+            header = Header.Default(
+                title = stringResource(R.string.profile_capabilities),
+            ),
             selection = ListSelection.Multiple(
                 showCheckBoxes = true,
                 options = options
@@ -290,7 +309,7 @@ fun CapsPanel(
         }) {
 
         Column(modifier = Modifier.padding(16.dp)) {
-            Text("Capabilities")
+            Text(stringResource(R.string.profile_capabilities))
             FlowRow {
                 selected.forEach { group ->
                     AssistChip(
@@ -330,6 +349,10 @@ private fun UidPanel(uid: Int, label: String, onUidChange: (Int) -> Unit) {
                 keyboardController?.hide()
             }),
             onValueChange = {
+                if (it.isEmpty()) {
+                    onUidChange(0)
+                    return@OutlinedTextField
+                }
                 val valid = isTextValidUid(it)
 
                 val targetUid = if (valid) it.toInt() else lastValidUid
