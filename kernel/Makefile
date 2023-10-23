@@ -32,6 +32,11 @@ ifndef KSU_EXPECTED_HASH
 KSU_EXPECTED_HASH := 6e0945bc6767f6e28dfe5da6e003c419cbdf8fa16c72e78092968e2ca7f35293
 endif
 
+ifdef KSU_MANAGER_PACKAGE
+ccflags-y += -DKSU_MANAGER_PACKAGE=\"$(KSU_MANAGER_PACKAGE)\"
+$(info -- KernelSU Manager package name: $(KSU_MANAGER_PACKAGE))
+endif
+
 $(info -- KernelSU Manager signature size: $(KSU_EXPECTED_SIZE))
 $(info -- KernelSU Manager signature hash: $(KSU_EXPECTED_HASH))
 

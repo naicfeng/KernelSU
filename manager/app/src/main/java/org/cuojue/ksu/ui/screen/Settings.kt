@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.ContactPage
+import androidx.compose.material.icons.filled.Fence
 import androidx.compose.material.icons.filled.RemoveModerator
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -27,6 +28,7 @@ import org.cuojue.ksu.R
 import org.cuojue.ksu.ui.component.AboutDialog
 import org.cuojue.ksu.ui.component.LoadingDialog
 import org.cuojue.ksu.ui.component.SwitchItem
+import org.cuojue.ksu.ui.screen.destinations.AppProfileTemplateScreenDestination
 import org.cuojue.ksu.ui.util.LocalDialogHost
 import org.cuojue.ksu.ui.util.getBugreportFile
 
@@ -55,6 +57,16 @@ fun SettingScreen(navigator: DestinationsNavigator) {
             val context = LocalContext.current
             val scope = rememberCoroutineScope()
             val dialogHost = LocalDialogHost.current
+
+            val profileTemplate = stringResource(id = R.string.settings_profile_template)
+            ListItem(
+                leadingContent = { Icon(Icons.Filled.Fence, profileTemplate) },
+                headlineContent = { Text(profileTemplate) },
+                supportingContent = { Text(stringResource(id = R.string.settings_profile_template_summary))},
+                modifier = Modifier.clickable {
+                     navigator.navigate(AppProfileTemplateScreenDestination)
+                }
+            )
 
             var umountChecked by rememberSaveable {
                 mutableStateOf(Natives.isDefaultUmountModules())
