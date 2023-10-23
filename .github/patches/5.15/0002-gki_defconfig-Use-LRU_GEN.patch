@@ -1,0 +1,12 @@
+diff --git a/arch/arm64/configs/gki_defconfig b/arch/arm64/configs/gki_defconfig
+index 99cc27552..854c8ddd7 100644
+--- a/arch/arm64/configs/gki_defconfig
++++ b/arch/arm64/configs/gki_defconfig
+@@ -123,6 +123,7 @@ CONFIG_ZSMALLOC=m
+ # CONFIG_ZONE_DMA is not set
+ CONFIG_ANON_VMA_NAME=y
+ CONFIG_LRU_GEN=y
++CONFIG_LRU_GEN_ENABLED=y
+ CONFIG_DAMON=y
+ CONFIG_DAMON_PADDR=y
+ CONFIG_DAMON_RECLAIM=y
